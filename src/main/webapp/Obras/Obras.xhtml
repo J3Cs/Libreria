@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+    </h:head>
+    <h:body>
+        <f:view>
+            <h:form id="tblForm">
+                <p:growl id="msg"/>
+                <h1><h:outputText value="Obras"/></h1>
+                <p:dataTable id="tbl" 
+                             value="#{ObraBean.lista}" 
+                             var="item" selectionMode="single" 
+                             rowKey="#{item.idObra}"
+                             sortBy="#{item.idObra}"
+                             rows="5" 
+                             paginator="true" 
+                             paginatorPosition="bottom">
+                    <p:ajax event="rowSelect" listener="#{ObraBean.onRowSelect}" update="frmCrud"/>
+                    <p:ajax event="rowUnselect" update="frmCrud" />
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="IdObra"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idObra}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nombre"/>
+                        </f:facet>
+                        <h:outputText value="#{item.titulo}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nacionalidad"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nacionalidad}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Editora"/>
+                        </f:facet>
+                        <h:outputText value="#{item.editora}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Fecha de Publicación"/>
+                        </f:facet>
+                        <h:outputText value="#{item.fechaPublicacion}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </f:view>
+
+        <f:view>
+            <h:form id="frmCrud">
+                <p:panel>
+                    <h2 class="h2">Crear un nuevo registro</h2>
+                    <h:panelGrid id="pnl" columns="3" class="pnlGrid">
+                        <p:column>
+                            <h:outputText value="Nombre:" class="outText"/>
+                            <h:inputText value="#{ObraBean.nuevo.titulo}" class="Text"/>
+                            <h:outputText value="Nacionalidad:" class="outText"/>
+                            <h:inputText value="#{ObraBean.nuevo.nacionalidad}"/>
+                            <h:outputText value="Editora:" class="outText"/>
+                            <h:inputText value="#{ObraBean.nuevo.editora}" class="Text"/>
+                            <h:outputText value="Publicada:" class="outText"/>
+                            <p:datePicker value="#{ObraBean.nuevo.fechaPublicacion}"/>
+                            <p:outputLabel value="Autores"/>
+
+                            <p:selectManyMenu value="#{ObraBean.autorBean.selectedAutors}" converter="omnifaces.SelectItemsConverter"
+                                              var="t" filter="true" filterMatchMode="contains" showCheckbox="true" scrollHeight="100">
+                                <f:selectItems value="#{ObraBean.autorBean.lista}" var="a" itemLabel="#{a.nombre}" itemValue="#{a}" />
+
+                                <p:column>
+                                    <h:outputText value="#{t.nombre} - #{t.nacionalidad}" />
+                                </p:column>
+
+                            </p:selectManyMenu>
+                        </p:column>
+                        <p:column>
+                            <p:dataTable value="#{ObraBean.aList}" var="a">
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Autores"/>
+                                    </f:facet>
+                                    <h:outputText value="#{a.nombre}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Nacionalidad"/>
+                                    </f:facet>
+                                    <h:outputText value="#{a.nacionalidad}"/>
+                                </p:column>
+                            </p:dataTable>
+                        </p:column>
+                    </h:panelGrid>
+                    <h:panelGrid class="btnpnl" columns="4">
+                        <p:commandButton value="Agregar" disabled="#{ObraBean.edit}" actionListener="#{ObraBean.onCreate}" action="#{ObraBean.limpiar}" update="@all"/>
+                        <p:commandButton value="Editar" disabled="#{!ObraBean.edit}" actionListener="#{ObraBean.onEdit}" action="#{ObraBean.limpiar}" update="@all"/>
+                        <p:commandButton value="Eliminar" disabled="#{!ObraBean.edit}" actionListener="#{ObraBean.onDelete}" action="#{ObraBean.limpiar}" update="@all"/>
+                        <p:commandButton value="Limpiar" actionListener="#{ObraBean.limpiar}" styleClass="ui-button-danger" update="@all"/>
+                    </h:panelGrid>
+                </p:panel>
+            </h:form>
+
+        </f:view>
+
+        <br />
+        <h:link outcome="/autor/List" value="Show All Obra Items"/>
+    </h:body>
+
+
+</html>
+

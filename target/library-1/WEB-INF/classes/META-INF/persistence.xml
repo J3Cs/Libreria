@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+  <!-- Define Persistence Unit -->
+  <persistence-unit name="prod" transaction-type="JTA">
+    <jta-data-source>jdbc/biblioteca</jta-data-source>
+    <class>com.j3cs.test.datalib.Autor</class>
+    <class>com.j3cs.test.datalib.Ejemplar</class>
+    <class>com.j3cs.test.datalib.Obra</class>
+    <class>com.j3cs.test.datalib.Prestamo</class>
+    <class>com.j3cs.test.datalib.Usuario</class>
+  </persistence-unit>
+</persistence>

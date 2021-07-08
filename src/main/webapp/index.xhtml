@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+    </h:head>
+    <h:body>
+        <f:view>
+
+
+            <h:form>
+                <h1><h:outputText value="List"/></h1>
+                <p:dataTable value="#{AutorBean.lista}" var="item" selectionMode="single" selection="#{AutorBean.nuevo}" rowKey="#{item.idAutor}">
+                    <p:ajax event="rowSelect" update="frmCrud" />
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="IdAutor"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idAutor}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nombre"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nombre}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nacionalidad"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nacionalidad}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Sexo"/>
+                        </f:facet>
+                        <h:outputText value="#{item.sexo}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </f:view>
+
+        <f:view>
+            <h:form id="frmCrud">
+                <p:panel>
+                    <h2 class="h2">Crear un nuevo registro</h2>
+                    <h:panelGrid id="pnl" columns="2" class="pnlGrid">
+                        <h:outputText value="Nombre:" class="outText"/>
+                        <h:inputText value="#{AutorBean.nuevo.nombre}" class="Text"/>
+                        <h:outputText value="Nacionalidad:" class="outText"/>
+                        <h:inputText value="#{AutorBean.nuevo.nacionalidad}"/>
+                        <h:outputText value="sexo:" class="outText"/>
+                        <h:inputText value="#{AutorBean.nuevo.sexo}" class="Text"/>
+                    </h:panelGrid>
+                    <h:panelGrid class="btnpnl">
+                        <h:commandButton value="AGREGAR" actionListener="#{AutorBean.create}"
+                                         action="#{AutorBean.limpiar}" class="commandButton" >
+                            <f:ajax execute="@form" render="@all"/>
+                        </h:commandButton>
+                    </h:panelGrid>
+                </p:panel>
+            </h:form>
+
+        </f:view>
+
+        <br />
+        <h:link outcome="/Obras/Obras" value="Agregar Obras"/>
+        <br />
+        <h:link outcome="/obra/List" value="Show All Obra Items"/>
+        <br />
+        <h:link outcome="/ejemplar/List" value="Show All Ejemplar Items"/>
+    </h:body>
+
+
+
+</html>
+
