@@ -22,7 +22,7 @@
                              paginator="true" 
                              paginatorPosition="bottom">
                     <p:ajax event="rowSelect" listener="#{ObraBean.onRowSelect}" update="frmCrud"/>
-                    <p:ajax event="rowUnselect" update="frmCrud" />
+                    <p:ajax event="rowUnselect" listener="#{ObraBean.limpiar()}" update="frmCrud" />
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="IdObra"/>
@@ -61,7 +61,7 @@
             <h:form id="frmCrud">
                 <p:panel>
                     <h2 class="h2">Crear un nuevo registro</h2>
-                    <h:panelGrid id="pnl" columns="3" class="pnlGrid">
+                    <h:panelGrid id="pnl" columns="5" class="pnlGrid">
                         <p:column>
                             <h:outputText value="Nombre:" class="outText"/>
                             <h:inputText value="#{ObraBean.nuevo.titulo}" class="Text"/>
@@ -71,31 +71,50 @@
                             <h:inputText value="#{ObraBean.nuevo.editora}" class="Text"/>
                             <h:outputText value="Publicada:" class="outText"/>
                             <p:datePicker value="#{ObraBean.nuevo.fechaPublicacion}"/>
-                            <p:outputLabel value="Autores"/>
-
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="Autores:"/>
                             <p:selectManyMenu value="#{ObraBean.autorBean.selectedAutors}" converter="omnifaces.SelectItemsConverter"
-                                              var="t" filter="true" filterMatchMode="contains" showCheckbox="true" scrollHeight="100">
+                                              var="t" filter="true" filterMatchMode="contains" showCheckbox="true" scrollHeight="175">
                                 <f:selectItems value="#{ObraBean.autorBean.lista}" var="a" itemLabel="#{a.nombre}" itemValue="#{a}" />
 
                                 <p:column>
-                                    <h:outputText value="#{t.nombre} - #{t.nacionalidad}" />
+                                    <h:outputText value="#{t.nombre} (#{t.nacionalidad})" />
                                 </p:column>
 
                             </p:selectManyMenu>
                         </p:column>
                         <p:column>
+                            <p:outputLabel value="Ejemplares:"/>
+                            <p:selectManyMenu value="#{ObraBean.ejemplarBean.selectedEjemplar}" converter="omnifaces.SelectItemsConverter"
+                                              var="t" filter="true" filterMatchMode="contains" showCheckbox="true" scrollHeight="175">
+                                <f:selectItems value="#{ObraBean.ejemplarBean.lista}" var="a" itemLabel="#{a.ejemplar}" itemValue="#{a}" />
+
+                                <p:column>
+                                    <h:outputText value="#{t.ejemplar} (#{t.estadoConservacion})" />
+                                </p:column>
+
+                            </p:selectManyMenu>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="Autor/es de la Obra"/>
                             <p:dataTable value="#{ObraBean.aList}" var="a">
                                 <p:column>
                                     <f:facet name="header">
                                         <h:outputText value="Autores"/>
                                     </f:facet>
-                                    <h:outputText value="#{a.nombre}"/>
+                                    <h:outputText value="#{a.nombre} #{a.nacionalidad}"/>
                                 </p:column>
+                            </p:dataTable>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="Ejemplares de la Obra"/>
+                            <p:dataTable value="#{ObraBean.eList}" var="a">
                                 <p:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Nacionalidad"/>
+                                        <h:outputText value="Autores"/>
                                     </f:facet>
-                                    <h:outputText value="#{a.nacionalidad}"/>
+                                    <h:outputText value="#{a.ejemplar} (#{a.estadoConservacion})"/>
                                 </p:column>
                             </p:dataTable>
                         </p:column>

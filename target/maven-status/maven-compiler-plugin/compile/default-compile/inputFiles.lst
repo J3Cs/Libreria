@@ -24,7 +24,6 @@
 /home/juliocardona/NetBeansProjects/library/src/main/java/com/j3cs/test/library/controller/ObraJpaController.java
 /home/juliocardona/NetBeansProjects/library/src/main/java/com/j3cs/test/library/facade/ObraFacadeLocal.java
 /home/juliocardona/NetBeansProjects/library/src/main/java/com/j3cs/test/library/controller/UsuarioJpaController.java
-/home/juliocardona/NetBeansProjects/library/src/main/java/com/j3cs/test/library/beans/converter/AutorConverter.java
 /home/juliocardona/NetBeansProjects/library/src/main/java/com/j3cs/test/library/beans/GenericBean.java
 /home/juliocardona/NetBeansProjects/library/src/main/java/com/j3cs/test/library/facade/PrestamoLocal.java
 /home/juliocardona/NetBeansProjects/library/src/main/java/com/j3cs/test/library/beans/util/JsfUtil.java

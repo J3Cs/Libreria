@@ -22,7 +22,6 @@ com/j3cs/test/library/facade/EjemplarFacadeLocal.class
 com/j3cs/test/library/controller/AutorJpaController.class
 com/j3cs/test/library/facade/PrestamoLocal.class
 com/j3cs/test/library/controller/PrestamoJpaController.class
-com/j3cs/test/library/beans/converter/AutorConverter.class
 com/j3cs/test/library/facade/AutorLocal.class
 com/j3cs/test/library/beans/EjemplarBean.class
 com/j3cs/test/library/controller/ObraJpaController.class

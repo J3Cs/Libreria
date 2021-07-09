@@ -6,6 +6,7 @@
 package com.j3cs.test.library.beans;
 
 import com.j3cs.test.datalib.Autor;
+import com.j3cs.test.datalib.Ejemplar;
 import com.j3cs.test.datalib.Obra;
 import com.j3cs.test.library.beans.util.JsfUtil;
 import com.j3cs.test.library.facade.GenericInterface;
@@ -34,14 +35,46 @@ public class ObrasBean extends GenericBean<Obra> implements Serializable{
     ObraLocal oController;
     @Inject
     AutorBean autorBean;
-    JsfUtil utils = new JsfUtil();
+    @Inject
+    EjemplarBean ejemplarBean;
+
+    Obra nuevo;
+    boolean edit;
+    List<Autor> aList;
+    List<Ejemplar> eList;
+    List<Obra> SelectedObras;
+
     
-    Obra nuevo = new Obra();
-    boolean edit = false;
-    List<Autor> aList = new ArrayList<>();
+    public EjemplarBean getEjemplarBean() {
+        return ejemplarBean;
+    }
+
+    public void setEjemplarBean(EjemplarBean ejemplarBean) {
+        this.ejemplarBean = ejemplarBean;
+    }
+    
+    public List<Obra> getSelectedObras() {
+        return SelectedObras;
+    }
+
+    public void setSelectedObras(List<Obra> SelectedObras) {
+        this.SelectedObras = SelectedObras;
+    }
+
+    public List<Ejemplar> geteList() {
+        return eList;
+    }
+
+    public void seteList(List<Ejemplar> eList) {
+        this.eList = eList;
+    }
+    
     
     @PostConstruct
     public void init(){
+        nuevo = new Obra();
+        edit = false;
+        aList = new ArrayList<>();
         llenar();
     }
 
@@ -55,23 +88,29 @@ public class ObrasBean extends GenericBean<Obra> implements Serializable{
     
     public void onCreate(){
         nuevo.setAutorList(autorBean.getSelectedAutors());
+        nuevo.setEjemplarList(ejemplarBean.getSelectedEjemplar());
         create();
     }
     
     public void onEdit(){
         nuevo.setAutorList(autorBean.getSelectedAutors());
+        nuevo.setEjemplarList(ejemplarBean.getSelectedEjemplar());
         edit();
     }
     
     public void onDelete(){
         nuevo.setAutorList(autorBean.getSelectedAutors());
+        nuevo.setEjemplarList(ejemplarBean.getSelectedEjemplar());
         delete();
     }
     
     public void onRowSelect(SelectEvent evt){
         edit = true;
         nuevo = (Obra) evt.getObject();
-        this.setaList(nuevo.getAutorList());
+        setaList(nuevo.getAutorList());
+        seteList(nuevo.getEjemplarList());
+        autorBean.setSelectedAutors(aList);
+        ejemplarBean.setSelectedEjemplar(eList);
     }
 
     public List<Autor> getaList() {
@@ -84,7 +123,10 @@ public class ObrasBean extends GenericBean<Obra> implements Serializable{
     
     public void limpiar(){
         setNuevo(new Obra());
-        this.setaList(new ArrayList<Autor>());
+        setaList(new ArrayList<>());
+        seteList(new ArrayList<>());
+        autorBean.setSelectedAutors(new ArrayList<>());
+        ejemplarBean.setSelectedEjemplar(new ArrayList<>());
         edit = false;
     }
     
