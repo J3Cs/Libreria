@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+    </h:head>
+    <h:body>
+        <f:view>
+            <h:form id="tblForm">
+                <p:growl id="msg"/>
+                <h1><h:outputText value="Usuarioes"/></h1>
+                <p:dataTable id="tbl" 
+                             value="#{UsuarioBean.lista}" 
+                             var="item" selectionMode="single" 
+                             rowKey="#{item.idUsuario}"
+                             sortBy="#{item.idUsuario}"
+                             rows="5" 
+                             paginator="true" 
+                             paginatorPosition="bottom">
+                    <p:ajax event="rowSelect" listener="#{UsuarioBean.onRowSelect}" update="frmCrud"/>
+                    <p:ajax event="rowUnselect" update="frmCrud" />
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nombre de Usuario"/>
+                        </f:facet>
+                        <h:outputText value="#{item.column1}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="DUI"/>
+                        </f:facet>
+                        <h:outputText value="#{item.dui}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Direccion"/>
+                        </f:facet>
+                        <h:outputText value="#{item.direccion}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Direccion"/>
+                        </f:facet>
+                        <h:outputText value="#{item.telefono}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </f:view>
+
+        <f:view>
+            <h:form id="frmCrud">
+                <p:panel>
+                    <h2 class="h2">Crear un nuevo registro</h2>
+                    <h:panelGrid id="pnl" columns="2" class="pnlGrid">
+
+                        <h:outputText value="Nombre de Usuario:" class="outText"/>
+                        <h:inputText value="#{UsuarioBean.nuevo.column1}" class="Text"/>
+                        <h:outputText value="DUI:" class="outText"/>
+                        <h:inputText value="#{UsuarioBean.nuevo.dui}"/>
+                        <h:outputText value="Teléfono:" class="outText"/>
+                        <h:inputText value="#{UsuarioBean.nuevo.telefono}"/>
+                        <h:outputText value="Direccion:" class="outText"/>
+                        <h:inputTextarea value="#{UsuarioBean.nuevo.direccion}"/>
+
+                    </h:panelGrid>
+                    <h:panelGrid class="btnpnl" columns="4">
+                        <p:commandButton value="Agregar" disabled="#{UsuarioBean.edit}" actionListener="#{UsuarioBean.create}" action="#{UsuarioBean.limpiar}" update="@all"/>
+                        <p:commandButton value="Editar" disabled="#{!UsuarioBean.edit}" actionListener="#{UsuarioBean.edit}" action="#{UsuarioBean.limpiar}" update="@all"/>
+                        <p:commandButton value="Eliminar" disabled="#{!UsuarioBean.edit}" actionListener="#{UsuarioBean.delete}" action="#{UsuarioBean.limpiar}" update="@all"/>
+                        <p:commandButton value="Limpiar" actionListener="#{UsuarioBean.limpiar}" styleClass="ui-button-danger" update="@all"/>
+                    </h:panelGrid>
+                </p:panel>
+            </h:form>
+
+        </f:view>
+
+        <br />
+        <h:link outcome="/autor/List" value="Show All Usuario Items"/>
+    </h:body>
+
+
+</html>
+

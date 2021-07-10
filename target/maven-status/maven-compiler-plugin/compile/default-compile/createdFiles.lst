@@ -9,6 +9,7 @@ com/j3cs/test/library/beans/ObrasBean.class
 com/j3cs/test/library/facade/EjemplarLocal.class
 com/j3cs/test/library/facade/AutorFacadeLocal.class
 com/j3cs/test/library/controller/exceptions/PreexistingEntityException.class
+com/j3cs/test/library/beans/UsuarioBean.class
 com/j3cs/test/library/exceptions/IllegalOrphanException.class
 com/j3cs/test/library/facade/ObraFacadeLocal.class
 com/j3cs/test/library/facade/ObraLocal.class

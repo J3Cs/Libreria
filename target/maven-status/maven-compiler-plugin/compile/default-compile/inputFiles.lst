@@ -20,6 +20,7 @@
 /home/juliocardona/NetBeansProjects/library/src/main/java/com/j3cs/test/library/facade/ObraLocal.java
 /home/juliocardona/NetBeansProjects/library/src/main/java/com/j3cs/test/library/beans/ObrasBean.java
 /home/juliocardona/NetBeansProjects/library/src/main/java/com/j3cs/test/library/facade/EjemplarFacadeLocal.java
+/home/juliocardona/NetBeansProjects/library/src/main/java/com/j3cs/test/library/beans/UsuarioBean.java
 /home/juliocardona/NetBeansProjects/library/src/main/java/com/j3cs/test/library/facade/UsuarioFacadeLocal.java
 /home/juliocardona/NetBeansProjects/library/src/main/java/com/j3cs/test/library/controller/ObraJpaController.java
 /home/juliocardona/NetBeansProjects/library/src/main/java/com/j3cs/test/library/facade/ObraFacadeLocal.java
